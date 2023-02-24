@@ -1,0 +1,8 @@
+services:
+  - name: app.js
+    type: web
+    buildCommand: npm install && npm run build
+    startCommand: node
+    env:
+      - key: DATABASE_URL
+        value: mysql://root:root@localhost:3000/airport
