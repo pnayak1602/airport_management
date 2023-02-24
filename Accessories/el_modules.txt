@@ -1,0 +1,9 @@
+Airport and Airline management system : 
+-> Ticket Booking System (passengers)
+-> Food ordering system (passengers/staff)
+-> Weather checking page (p/s)
+-> Automated Passport verification process (passengers)
+-> Dynamic Flight position (and flight specifications)(only for air traffic controller)
+-> Baggage system
+-> Games
+-> Chatbot 

@@ -1,0 +1,40 @@
+<%- include("header") -%>
+<div class="main">
+
+
+
+    <!-- Sing in  Form -->
+    <section class="sign-in">
+        <div class="container">
+            <div class="container">
+                <div class="row">
+                  <div class="col-12">
+
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th scope="col">Food Id</th>
+                          <th scope="col">Passenger Id</th>
+                          <th scope="col">Quantity</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% for(var i=0;i<contents.length;i++) { %>
+                        <tr>
+                          <td><%= contents[i].ItemId %></td>
+                          <td><%= contents[i].PassengerId %></td>
+                          <td><%= contents[i].Quantity %></td>
+                        </tr>
+                        <% } %>
+                      </tbody>
+                    </table>
+                                  </div>
+                </div>
+              </div>
+        </div>
+    </section>
+
+</div>
+<!-- JS -->
+<script src="js/foodOrderingJS.js"></script>
+<%- include("footer") -%>

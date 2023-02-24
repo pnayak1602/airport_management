@@ -1,0 +1,74 @@
+<%- include("header") -%>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="pranamya/flight_view/fonts/icomoon/style.css">
+
+  <link rel="stylesheet" href="pranamya/flight_view/css/owl.carousel.min.css">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="pranamya/flight_view/css/bootstrap.min.css">
+
+  <!-- Style -->
+  <link rel="stylesheet" href="pranamya/flight_view/css/style.css">
+
+  <title>ABC Airport Flights</title>
+</head>
+
+<body>
+
+
+  <div class="content">
+
+    <div class="container">
+      <h2 class="mb-5"></h2>
+
+      <div class="table-responsive">
+        <form action="/book_tickets" method="post">
+        <table class="table table-striped custom-table">
+          <thead>
+            <tr>
+              <th scope="col">Airline Id</th>
+              <th scope="col">Airline Name</th>
+              <th scope="col">Flight Number</th>
+              <th scope="col">Price </th>
+              <th scope="col">Arrival Time</th>
+              <th scope="col">Departure Time</th>
+              <th scope="col">Checkout</th>
+            </tr>
+          </thead>
+          <tbody>
+              <% for(var i=0;i<flights.length;i++) { %>
+                <tr scope="row">
+                  <td><%= flights[i].airlineid %></td>
+                  <td><%= flights[i].airline_name %></td>
+                  <td><%= flights[i].flightno %></td>
+                  <td><%= flights[i].price %></td>
+                  <td><%= flights[i].arrivaltime %></td>
+                  <td><%= flights[i].departuretime %></td>
+                  <input type="hidden" name="airlineID" value= <%= flights[i].airlineid %>>
+                  <input type="hidden" name="airline_name" value= <%= flights[i].airline_name %>>
+                  <input type="hidden" name="flightNo" value= <%= flights[i].flightno %>>
+                  <input type="hidden" name="price" value= <%= flights[i].price %>>
+                  <td><button type="submit" class="btn btn-primary" name="checkout_button">Checkout</button></td>
+                </tr>
+                <% } %>
+          </tbody>
+        </table>
+        </form>
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+
+  <script src="pranamya/flight_view/js/jquery-3.3.1.min.js"></script>
+  <script src="pranamya/flight_view/js/popper.min.js"></script>
+  <script src="pranamya/flight_view/js/bootstrap.min.js"></script>
+  <script src="pranamya/flight_view/js/main.js"></script>
+  <%- include("footer") -%>

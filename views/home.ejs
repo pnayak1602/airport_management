@@ -1,0 +1,91 @@
+<%- include("header") -%>
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+  <h5 class="my-0 mr-md-auto font-weight-normal">ABC Airport</h5>
+  <!-- <nav class="my-2 my-md-0 mr-md-3">
+    <a class="p-2 text-dark" href="#">Features</a>
+    <a class="p-2 text-dark" href="#">Enterprise</a>
+    <a class="p-2 text-dark" href="#">Support</a>
+    <a class="p-2 text-dark" href="#">Pricing</a>
+  </nav> -->
+  <!-- <a class="btn btn-outline-primary" href="#">Sign up</a> -->
+</div>
+<img class='airportImg' src="img/airport.png">
+<br><br>
+<div class="container">
+    <div class="row card-deck text-center">
+        <div class="card col-lg-4 box-shadow">
+            <div class="card-header">
+              <h4 class="my-0 font-weight-normal">ADMIN</h4>
+            </div>
+            <div class="card-body">
+              <!-- <h1 class="card-title pricing-card-title">$29 <small class="text-muted">/ mo</small></h1>
+              <ul class="list-unstyled mt-3 mb-4">
+                <li>30 users included</li>
+                <li>15 GB of storage</li>
+                <li>Phone and email support</li>
+                <li>Help center access</li>
+              </ul> -->
+              <form action="/login" method="get">
+                <button type="submit" class="btn btn-lg btn-block btn-primary">Login</button>
+              </form>
+            </div>
+          </div>
+      <div class="card col-lg-4 box-shadow">
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal">AIRPORT STAFF</h4>
+        </div>
+        <div class="card-body">
+          <!-- <h1 class="card-title pricing-card-title">$15 <small class="text-muted">/ mo</small></h1>
+          <ul class="list-unstyled mt-3 col-mb-4">
+            <li>20 users included</li>
+            <li>10 GB of storage</li>
+            <li>Priority email support</li>
+            <li>Help center access</li>
+          </ul> -->
+          <form action="/videoStream" method="get">
+          <button type="submit" class="btn btn-lg btn-block btn-primary">Passport Verification</button>
+          </form>
+          <form action="/foodOrderCheck" method="get">
+          <button type="submit" class="btn btn-lg btn-block btn-primary">Food order checking</button>
+          </form>
+        </div>
+      </div>
+      <div class="card col-lg-4 box-shadow">
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal">PASSENGER</h4>
+        </div>
+        <div class="card-body">
+          <!-- <h1 class="card-title pricing-card-title">$29 <small class="text-muted">/ mo</small></h1>
+          <ul class="list-unstyled mt-3 mb-4">
+            <li>30 users included</li>
+            <li>15 GB of storage</li>
+            <li>Phone and email support</li>
+            <li>Help center access</li>
+          </ul> -->
+          <form action="/book" method="get">
+          <button type="submit" class="btn btn-lg btn-block btn-primary">Book tickets</button>
+          </form>
+        </div>
+      </div>
+      <!-- <div class="card col-lg-3 box-shadow">
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal">AIR TRAFFIC CONTROLLER</h4>
+        </div>
+        <div class="card-body">
+           <h1 class="card-title pricing-card-title">$29 <small class="text-muted">/ mo</small></h1>
+          <ul class="list-unstyled mt-3 mb-4">
+            <li>30 users included</li>
+            <li>15 GB of storage</li>
+            <li>Phone and email support</li>
+            <li>Help center access</li>
+          </ul>
+          <button type="button" class="btn btn-lg btn-block btn-primary">Check flights</button>
+        </div>
+      </div> -->
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<%- include("footer") -%>

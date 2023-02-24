@@ -1,0 +1,56 @@
+<%- include("header") -%>
+<div class="main">
+
+
+
+    <!-- Sing in  Form -->
+    <section class="sign-in">
+        <div class="container">
+            <div class="container">
+                <div class="row">
+                  <div class="col-12">
+
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th scope="col">Image</th>
+                          <th scope="col">Food Item</th>
+                          <th scope="col">Type</th>
+                          <th scope="col">Price</th>
+                          <th scope="col">Add Item</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% for(var i=0;i<contents.length;i++) { %>
+                        <tr>
+                          <td><img src=<%= contents[i].ImgUrl %> alt="" width="100px" height="100px"></td>
+                          <td><%= contents[i].FoodName %></td>
+                          <td><%= contents[i].FoodType %></td>
+                          <td><%= contents[i].Cost %></td>
+                          <td>
+                            <!-- <button type="button" class="btn btn-primary">Add</button> -->
+                            <div>
+                              <button type="button" class = "btn btn-primary add-btn" id=<%= contents[i].ItemId %>>Add <span class="counter">0</span></button>
+                            </div>
+                          </td>
+                        </tr>
+                        <% } %>
+                      </tbody>
+                    </table>
+                    
+                    <form class="form-addon" action="/payment" method="post"><button type="button" class="skip btn btn-lg btn-light">Skip</button></form>
+                    <form class="form-addon" action="/calculator" method="post">
+                    
+                      <button type="submit" class="next btn btn-lg btn-secondary">Next</button>
+                    </form>
+                    <button type="button" class="clear btn btn-lg btn-light">Clear</button>
+                  </div>
+                </div>
+              </div>
+        </div>
+    </section>
+
+</div>
+<!-- JS -->
+<script src="js/foodOrderingJS.js"></script>
+<%- include("footer") -%>
