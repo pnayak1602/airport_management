@@ -9,6 +9,7 @@ const date = require("date");
 global.no_of_passengers = 0;
 global.cost = 0;
 global.food = [];
+global.passengerids = [];
 global.flightSelDetails = {};
 global.passengerDetails = {};
 global.airlineIdATC = 0;
@@ -116,6 +117,7 @@ app.post("/addAirHostess", function (req, res) {
   const staffId = request.staff_id;
   const hostessId = request.airhostess_id;
   const airlineId = request.airline_id;
+  console.log(request);
   var SQL = "INSERT INTO AirportStaff VALUES ?";
   var values = [[staffId, "Air Hostess"]];
   connection.query(SQL, [values], function (err) {
@@ -379,7 +381,8 @@ app.post("/book_tickets", function (req, res) {
   console.log(global.flightSelDetails.price);
   global.cost = global.no_of_passengers * req.body.price;
   console.log(global.cost);
-  res.render("book", {
+  res.render("book",
+   {
     number: global.no_of_passengers,
     no_of_seats: req.body.no_of_seats,
   });
@@ -392,6 +395,7 @@ app.get("/book", function (req, res) {
 app.get("/payment", function (req, res) {
   var SQL = "";
   global.ticketDetails = [];
+  global.passengerids = [];
   console.log(global.no_of_passengers);
   async function insertPassengers() {
     for (var i = 0; i < global.no_of_passengers; i++) {
@@ -400,6 +404,8 @@ app.get("/payment", function (req, res) {
         const result = await getCountFromPassengerTable();
         console.log(result[0]["counter"]);
         var counter = result[0]["counter"] + 1;
+        global.passengerids.push(counter);
+        console.log("This one : " + global.passengerids);
         SQL = "INSERT INTO Passenger VALUES ?";
         console.log(global.passengerDetails.name);
         console.log(global.passengerDetails.name[i]);
@@ -433,8 +439,13 @@ app.get("/payment", function (req, res) {
         values = [[counter, PNR, global.passengerDetails.seat[i]]];
         await insertValuesIntoBooksTable(values);
         console.log("Passenger details inserted into the database.");
-        values = [PNR, global.passengerDetails.seat[i], global.flightSelDetails.flightNo, global.flightSelDetails.airlineID];
-        await getTicket(values)
+        values = [
+          PNR,
+          global.passengerDetails.seat[i],
+          global.flightSelDetails.flightNo,
+          global.flightSelDetails.airlineID,
+        ];
+        await getTicket(values);
       } catch (err) {
         console.log(err);
       }
@@ -493,9 +504,10 @@ app.get("/payment", function (req, res) {
     });
   }
 
-  function getTicket(values){
+  function getTicket(values) {
     return new Promise(function (resolve, reject) {
-      var SQL = "SELECT t.PNR, t.seatno, t.flightno, t.airlineid, t.class, t.source, t.destination, t.gate, f.arrivaltime, f.departuretime, a.airline_name, p.name from Ticket t, flight f, airline a, passenger p, books b where t.flightno = f.flightno and t.airlineid = f.airlineid and t.airlineid = a.airlineid and p.passengerid = b.passengerid and b.pnr = t.pnr and t.PNR = ? and t.seatno = ? and t.flightno = ? and t.airlineid = ? ";
+      var SQL =
+        "SELECT t.PNR, t.seatno, t.flightno, t.airlineid, t.class, t.source, t.destination, t.gate, f.arrivaltime, f.departuretime, a.airline_name, p.name from Ticket t, flight f, airline a, passenger p, books b where t.flightno = f.flightno and t.airlineid = f.airlineid and t.airlineid = a.airlineid and p.passengerid = b.passengerid and b.pnr = t.pnr and t.PNR = ? and t.seatno = ? and t.flightno = ? and t.airlineid = ? ";
       connection.query(SQL, values, function (err, result) {
         if (err) {
           reject(err);
@@ -513,7 +525,10 @@ app.get("/payment", function (req, res) {
   insertPassengers()
     .then(function () {
       console.log("All passenger details inserted into the database.");
-      res.render("payment", { total_cost: global.cost, ticket : global.ticketDetails});
+      res.render("payment", {
+        total_cost: global.cost,
+        ticket: global.ticketDetails,
+      });
     })
     .catch(function (err) {
       console.log(err);
@@ -539,12 +554,47 @@ app.get("/calculator", function (req, res) {
   const encodedData = req.query.data;
   const data = JSON.parse(decodeURIComponent(encodedData));
   console.log(data);
-  for (var k = 0; k < data.length; k++) {
-    var number = data[k];
-    global.cost = global.cost + number * global.food[k].Cost;
+  async function insertOrders(data) {
+    const passengerid = (await getCountFromPassengerTable())[0]["counter"]+1;
+    for (var k = 0; k < data.length; k++) {
+      var number = data[k];
+      console.log("See Here : " + passengerid);
+      console.log(data);
+      if (number > 0) {
+        const newOrder = new Order({
+          ItemId: k + 1,
+          PassengerId: passengerid,
+          Quantity: number,
+        });
+        newOrder.save(function (err) {
+          if (!err) console.log("Saved");
+          else console.log(err);
+        });
+      }
+      global.cost = global.cost + number * global.food[k].Cost;
+    }
   }
-  console.log(global.cost);
-  res.redirect("/payment");
+  function getCountFromPassengerTable() {
+    return new Promise(function (resolve, reject) {
+      var SQL = "SELECT COUNT(*) as counter from Passenger";
+      connection.query(SQL, function (err, result) {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(result);
+        }
+      });
+    });
+  }
+  insertOrders(data)
+    .then(function () {
+      console.log("All order details inserted into the database.");
+      console.log(global.cost);
+      res.redirect("/payment");
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
 });
 app.get("/videoStream", function (req, res) {
   res.sendFile(__dirname + "/passportVerify.html");
@@ -572,45 +622,51 @@ app.get("/retake", function (req, res) {
   res.sendFile(__dirname + "/retake.html");
 });
 
-app.get("/flight-control", function(req, res){
+app.get("/flight-control", function (req, res) {
   res.sendFile(__dirname + "/tc_search.html");
 });
-app.post("/flight-control", function(req, res){
+app.post("/flight-control", function (req, res) {
   const request = req.body;
   console.log(request);
   global.airlineIdATC = request.airline_no;
   global.flightNoATC = request.flight_no;
-  if(request.submit == "view-status"){
-    var SQL = "SELECT f.airlineid, f.flightno, a.airline_name, f.runwayassigned, f.airbus_ground, f.trafficclearance, f.groundstaffinformed from flight f, airline a where f.airlineid = a.airlineid and f.flightno = ? and f.airlineid = ?";
+  if (request.submit == "view-status") {
+    var SQL =
+      "SELECT f.airlineid, f.flightno, a.airline_name, f.runwayassigned, f.airbus_ground, f.trafficclearance, f.groundstaffinformed from flight f, airline a where f.airlineid = a.airlineid and f.flightno = ? and f.airlineid = ?";
     var values = [global.flightNoATC, global.airlineIdATC];
-    connection.query(SQL, values, function(err, result){
+    connection.query(SQL, values, function (err, result) {
       console.log(result);
-      res.render("viewTC", {details : result});
+      res.render("viewTC", { details: result });
     });
-  }
-  else{
+  } else {
     res.render("EditTC");
   }
 });
 
-app.post("/edit-status", function(req, res){
+app.post("/edit-status", function (req, res) {
   const request = req.body;
   console.log(request);
-  var SQL = "UPDATE flight SET runwayassigned = ?, airbus_ground = ?, trafficclearance = ?, groundstaffinformed = ? WHERE flightno = ? and airlineid = ?";
-  var values = [request.runway_assigned, request.airbus_ground, request.tra_cle, request.g_s, global.flightNoATC, global.airlineIdATC];
-  connection.query(SQL, values, function(err, result){
-    if(!err){
+  var SQL =
+    "UPDATE flight SET runwayassigned = ?, airbus_ground = ?, trafficclearance = ?, groundstaffinformed = ? WHERE flightno = ? and airlineid = ?";
+  var values = [
+    request.runway_assigned,
+    request.airbus_ground,
+    request.tra_cle,
+    request.g_s,
+    global.flightNoATC,
+    global.airlineIdATC,
+  ];
+  connection.query(SQL, values, function (err, result) {
+    if (!err) {
       console.log("Update done");
       res.render("done");
-    }
-    else
-    console.log(err);
-  })
+    } else console.log(err);
+  });
 });
 
-app.post('/ordered-food', (req, res) => {
+app.post("/ordered-food", (req, res) => {
   const myArray2 = req.body;
-  const myArray = encodeURIComponent(JSON.stringify(myArray2))
+  const myArray = encodeURIComponent(JSON.stringify(myArray2));
   console.log("Here it is : " + myArray);
   res.redirect("/calculator?data=" + myArray);
 });
