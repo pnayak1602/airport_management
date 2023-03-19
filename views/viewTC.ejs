@@ -25,7 +25,7 @@
     <link href="pranamya/vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
 
     <!-- Main CSS-->
-    <link href="pranamya/tc_search/css/main.css" rel="stylesheet" media="all">
+    <link href="pranamya/view_tc/css/main.css" rel="stylesheet" media="all">
 </head>
 <style>
     body {
@@ -41,34 +41,45 @@
         <div class="wrapper wrapper--w680">
             <div class="card card-4">
                 <div class="card-body">
+                    <div>
+                        <p>Airline number : <%= details[0].airlineid %> </p>
+                    </div>
+                    <br>
+                    <div>
+                        <p>Airline name : <%= details[0].airline_name %> </p>
+                    </div>
+                    <br>
+                    <div>
+                        <p>Flight number : <%= details[0].flightno %> </p>
+                    </div>
+                    <br>
+                    <div>
+                        <p>Runway assigned?(y/n) : <%= details[0].runwayassigned %> </p>
+                    </div>
+                    <br>
+                    <div>
+                        <p>Air bus/Ground : <%= details[0].airbus_ground %></p>
+                    </div>
+                    <br>
+                    <div>
+                        <p>traffic cleared?(y/n) : <%= details[0].trafficclearance %></p>
+                    </div>
+                    <br>
+                    <div>
+                        <p> Ground staff informed?(y/n) : <%= details[0].groundstaffinformed %></p>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="mb-3 mr-3">
+                        <a href="/flight-control">
+                            <button class="btn btn--radius-2 btn--blue">Back</button>
+                    </div>
+                    </a>
 
-                    <form method="POST">
-                        <div class="row row-space">
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <label class="label">Enter Airline Number : </label>
-                                    <input class="input--style-4" type="text" name="airline_no">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row row-space">
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <label class="label">Enter Flight Number : </label>
-                                    <input class="input--style-4" type="text" name="flight_no">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p-t-15">
-                                <button class="btn btn--radius-2 btn--blue" type="submit" name="submit" value="view-status">View Status</button>
-                                <button class="btn btn--radius-2 btn--blue" type="submit" name="submit" value="edit-status">Edit Status</button>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>
     </div>
-
 
     <!-- Jquery JS-->
     <script src="pranamya/vendor/jquery/jquery.min.js"></script>

@@ -40,49 +40,17 @@
     <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
         <div class="wrapper wrapper--w680">
             <div class="card card-4">
-                <% for(var i=0;i<ticket.length;i++) { %>
-                <div class="card-body2">
-                        <div class="ranran">
-                            <div class="row row-space">
-                                <div class="col-3">
-                                    <center><h1 class="font-poppins">e - Ticket</h1></center>
-                                    <div class="input-group2">
-                                        <p class="left">PNR : <%= ticket[i][0].PNR %></p>
-                                        <p class="right">Airline name : <%= ticket[i][0].airline_name %></p>
-                                        <br>
-                                        <p class="left">Flight number : <%= ticket[i][0].flightno %></p>
-                                        <p class="right">Class : <%= ticket[i][0].class %></p>
-                                        <br>
-                                        <p class="left">Seat number : <%= ticket[i][0].seatno %></p>
-                                        <p class="right">Name : <%= ticket[i][0].name %></p>
-                                        <br>
-                                        <p class="left">Source  : <%= ticket[i][0].source %></p>
-                                        <p class="right">Destination : <%= ticket[i][0].destination %></p>
-                                        <br>
-                                        <p class="left">Gate : <%= ticket[i][0].gate %></p>
-                                        <br>
-                                        <p class="left">Arrival Time : <%= ticket[i][0].arrivaltime %></p>
-                                        <p class="right">Departure Time : <%= ticket[i][0].departuretime %></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                </div>
-                <% } %>
-            </div>
-            <div class="card card-4">
                 <div class="card-body">
+
                     <form method="POST" action="/show-ticket">
+
                         <div class="ranran">
                             <div class="row row-space">
                                 <div class="col-2">
                                     <div class="input-group">
-                                        <p>Amount to be paid : <%= total_cost %></p>
+                                        <p>Thank you for choosing us &#10084;</p>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="p-t-15">
-                                <button class="btn btn--radius-2 btn--blue" type="submit">Pay</button>
                             </div>
                         </div>
                     </form>

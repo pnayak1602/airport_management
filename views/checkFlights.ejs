@@ -26,7 +26,7 @@
       <h2 class="mb-5"></h2>
 
       <div class="table-responsive">
-        <form action="/book_tickets" method="post">
+        
         <table class="table table-striped custom-table">
           <thead>
             <tr>
@@ -48,16 +48,22 @@
                   <td><%= flights[i].price %></td>
                   <td><%= flights[i].arrivaltime %></td>
                   <td><%= flights[i].departuretime %></td>
+                  <form action="/book_tickets" method="post">
                   <input type="hidden" name="airlineID" value= <%= flights[i].airlineid %>>
                   <input type="hidden" name="airline_name" value= <%= flights[i].airline_name %>>
                   <input type="hidden" name="flightNo" value= <%= flights[i].flightno %>>
                   <input type="hidden" name="price" value= <%= flights[i].price %>>
+                  <input type="hidden" name="no_of_seats" value= <%= flights[i].no_of_seats %>>
+                  <input type="hidden" name="gate" value= <%= flights[i].gate %>>
+                  <input type="hidden" name="source" value= <%= flights[i].source %>>
+                  <input type="hidden" name="destination" value= <%= flights[i].destination %>>
                   <td><button type="submit" class="btn btn-primary" name="checkout_button">Checkout</button></td>
+                  </form>
                 </tr>
                 <% } %>
           </tbody>
         </table>
-        </form>
+        
       </div>
 
 

@@ -47,14 +47,23 @@
                         <div>
                             <label for="seat">Passenger <%= i+1 %> :</label>
                             <label> Name </label>
-                            <input type="text" name="name">
+                            <input class="getBorder" type="text" name="name">
                             <label> Age </label>
-                            <input type="number" name="age">
+                            <input class="getBorder" type="number" name="age">
                             <label> Select Seat : </label>
                             <select name="seat" id="seat">
-                                <% for(var j=0;j<350;j++) { %>
-                                <option value=<% j+1 %>><%= j+1 %></option>
+                                <% for(var j=0;j < no_of_seats;j++) { %>
+                                <option value=<%= j+1 %>><%= j+1 %></option>
                                 <% } %>
+                            </select>
+                            <br>
+                            <label> Enter the no. of luggages : </label>
+                            <input class="getBorder" type="number" name="no_of_luggages">
+                            <label> Select the Class : </label>
+                            <select name="class" id="class">
+                                <option value='FirstClass'>First Class</option>
+                                <option value='BusinessClass'>Business Class</option>
+                                <option value='EconomyClass'>Economy Class</option>
                             </select>
                         </div>
                         <br>

@@ -26,7 +26,7 @@
                           <td><img src=<%= contents[i].ImgUrl %> alt="" width="100px" height="100px"></td>
                           <td><%= contents[i].FoodName %></td>
                           <td><%= contents[i].FoodType %></td>
-                          <td><%= contents[i].Cost %></td>
+                          <td>Rs. <%= contents[i].Cost %></td>
                           <td>
                             <!-- <button type="button" class="btn btn-primary">Add</button> -->
                             <div>
@@ -40,7 +40,6 @@
                     
                     <form class="form-addon" action="/payment" method="post"><button type="button" class="skip btn btn-lg btn-light">Skip</button></form>
                     <form class="form-addon" action="/calculator" method="post">
-                    
                       <button type="submit" class="next btn btn-lg btn-secondary">Next</button>
                     </form>
                     <button type="button" class="clear btn btn-lg btn-light">Clear</button>

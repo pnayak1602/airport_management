@@ -1,47 +1,38 @@
-<%- include("header") -%>
+<%- include("headerHome") -%>
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+  <i class="fa fa-tachometer-alt" aria-hidden="true"></i>
   <h5 class="my-0 mr-md-auto font-weight-normal">ABC Airport</h5>
-  <!-- <nav class="my-2 my-md-0 mr-md-3">
-    <a class="p-2 text-dark" href="#">Features</a>
-    <a class="p-2 text-dark" href="#">Enterprise</a>
+  <nav class="my-2 my-md-0 mr-md-3">
+    <a class="p-2 text-dark" href="#">About</a>
+    <a class="p-2 text-dark" href="#">Gallery</a>
     <a class="p-2 text-dark" href="#">Support</a>
-    <a class="p-2 text-dark" href="#">Pricing</a>
-  </nav> -->
+  </nav>
   <!-- <a class="btn btn-outline-primary" href="#">Sign up</a> -->
 </div>
-<img class='airportImg' src="img/airport.png">
-<br><br>
+<!-- <img class='airportImg' src="img/airport.png"> -->
 <div class="container">
     <div class="row card-deck text-center">
-        <div class="card col-lg-4 box-shadow">
+        <div class="card col-lg-3 box-shadow">
             <div class="card-header">
               <h4 class="my-0 font-weight-normal">ADMIN</h4>
             </div>
             <div class="card-body">
-              <!-- <h1 class="card-title pricing-card-title">$29 <small class="text-muted">/ mo</small></h1>
-              <ul class="list-unstyled mt-3 mb-4">
-                <li>30 users included</li>
-                <li>15 GB of storage</li>
-                <li>Phone and email support</li>
-                <li>Help center access</li>
-              </ul> -->
+              <p>
+                The administration of an airport management system involves overseeing airport staff, ensuring safety and security, and coordinating with airlines and stakeholders. Effective administration requires strong leadership, communication skills, and the ability to make quick decisions.
+              </p>
               <form action="/login" method="get">
                 <button type="submit" class="btn btn-lg btn-block btn-primary">Login</button>
               </form>
             </div>
           </div>
-      <div class="card col-lg-4 box-shadow">
+      <div class="card col-lg-3 box-shadow">
         <div class="card-header">
           <h4 class="my-0 font-weight-normal">AIRPORT STAFF</h4>
         </div>
         <div class="card-body">
-          <!-- <h1 class="card-title pricing-card-title">$15 <small class="text-muted">/ mo</small></h1>
-          <ul class="list-unstyled mt-3 col-mb-4">
-            <li>20 users included</li>
-            <li>10 GB of storage</li>
-            <li>Priority email support</li>
-            <li>Help center access</li>
-          </ul> -->
+          <p>
+            Airport staff play a critical role in ensuring the smooth and safe operation of an airport. This includes a wide range of positions, such as customer service representatives, security personnel, air traffic controllers, baggage handlers, and maintenance staff.
+          </p>
           <form action="/videoStream" method="get">
           <button type="submit" class="btn btn-lg btn-block btn-primary">Passport Verification</button>
           </form>
@@ -50,42 +41,31 @@
           </form>
         </div>
       </div>
-      <div class="card col-lg-4 box-shadow">
+      <div class="card col-lg-3 box-shadow">
         <div class="card-header">
           <h4 class="my-0 font-weight-normal">PASSENGER</h4>
         </div>
         <div class="card-body">
-          <!-- <h1 class="card-title pricing-card-title">$29 <small class="text-muted">/ mo</small></h1>
-          <ul class="list-unstyled mt-3 mb-4">
-            <li>30 users included</li>
-            <li>15 GB of storage</li>
-            <li>Phone and email support</li>
-            <li>Help center access</li>
-          </ul> -->
+          <p>
+            Passenger booking tickets is a vital part of air travel. This process involves selecting flight dates and times, choosing a seat, and providing personal information. Modern technology has made it easier for passengers to book tickets online, with many airlines offering mobile apps and other tools to streamline the booking process.
+          </p>
           <form action="/book" method="get">
           <button type="submit" class="btn btn-lg btn-block btn-primary">Book tickets</button>
           </form>
         </div>
       </div>
-      <!-- <div class="card col-lg-3 box-shadow">
+      <div class="card col-lg-3 box-shadow">
         <div class="card-header">
-          <h4 class="my-0 font-weight-normal">AIR TRAFFIC CONTROLLER</h4>
+          <h4 class="my-0 font-weight-normal">AIR TRAFFIC CONTROL</h4>
         </div>
         <div class="card-body">
-           <h1 class="card-title pricing-card-title">$29 <small class="text-muted">/ mo</small></h1>
-          <ul class="list-unstyled mt-3 mb-4">
-            <li>30 users included</li>
-            <li>15 GB of storage</li>
-            <li>Phone and email support</li>
-            <li>Help center access</li>
-          </ul>
-          <button type="button" class="btn btn-lg btn-block btn-primary">Check flights</button>
+          <p>Air traffic control is a vital system that manages the flow of aircraft in the sky. It ensures safe and efficient operations, preventing collisions and delays. Air traffic controllers use advanced technology and communication systems to maintain control over air traffic.
+          </p>
+          <form action="/flight-control" method="get">
+          <button type="submit" class="btn btn-lg btn-block btn-primary">Manage Flights</button>
+          </form>
         </div>
-      </div> -->
+      </div>
     </div>
 </div>
-<br>
-<br>
-<br>
-<br>
 <%- include("footer") -%>

@@ -14,6 +14,8 @@ for(var i=0;i<addBtn.length;i++)
         next.classList.add("btn-success");
       });
 }
+
+
 const clear = document.getElementsByClassName('clear')[0];
 clear.addEventListener('click', function(){
   for(var j=0;j<addBtn.length;j++)
@@ -25,16 +27,24 @@ clear.addEventListener('click', function(){
     console.log(next.classList);
   }
 });
-// next.addEventListener("click", function(event) {
-//   const xhr = new XMLHttpRequest();
-//   const url = "http://localhost:3000/calculator";
-//   xhr.open("POST", url);
-//   xhr.setRequestHeader("Content-Type", "application/json");
-//   const data = {
-//     name : 'hello',
-//     btn : addBtn,
-//     quantity : counterList
-//   };
-//   const json = JSON.stringify(data);
-//   xhr.send(json);  
-// });
+
+
+next.addEventListener('click', function(event){
+  event.preventDefault();
+  console.log("What is this ? " + counterList);
+  fetch('/ordered-food', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(counterList)
+  })
+  .then(response => response.text())
+  .then(html => {
+    // Replace the contents of the current page with the response HTML
+    document.open();
+    document.write(html);
+    document.close();
+  })
+  .catch(error => console.error(error));
+});
