@@ -277,7 +277,7 @@ app.post("/deleteGS", function (req, res) {
 
 app.get("/adminFlightList", function (req, res) {
   var SQL =
-    "select f.airlineid, f.flightno, f.source, f.destination, f.date_of_flight, f.no_of_seats, count(*) as booked from flight f, ticket t where f.flightno = t.flightno and f.airlineid = t.airlineid";
+    "SELECT f.airlineid, f.flightno, f.source, f.destination, f.date_of_flight, f.no_of_seats, COUNT(*) as booked FROM Flight f INNER JOIN Ticket t ON f.flightno = t.flightno AND f.airlineid = t.airlineid GROUP BY f.flightno, t.airlineid";
   connection.query(SQL, function (err, result) {
     if (!err) {
       if (result) {
@@ -310,7 +310,7 @@ app.post("/searchFlight", function (req, res) {
   const airlineId = request.airline_id;
   const flightNo = request.flight_no;
   var SQL =
-    "select f.airlineid, f.flightno, f.source, f.destination, f.date_of_flight, f.no_of_seats, count(*) as booked from flight f, ticket t where f.flightno = t.flightno and f.airlineid = t.airlineid and f.airlineid = ? and f.flightno = ?";
+    "SELECT f.airlineid, f.flightno, f.source, f.destination, f.date_of_flight, f.no_of_seats, COUNT(*) as booked FROM Flight f INNER JOIN Ticket t ON f.flightno = t.flightno AND f.airlineid = t.airlineid WHERE f.airlineid = ? and f.flightno = ? GROUP BY f.flightno, t.airlineid";
   var values = [airlineId, flightNo];
   connection.query(SQL, values, function (err, result, fields) {
     if (!err) {
@@ -381,8 +381,7 @@ app.post("/book_tickets", function (req, res) {
   console.log(global.flightSelDetails.price);
   global.cost = global.no_of_passengers * req.body.price;
   console.log(global.cost);
-  res.render("book",
-   {
+  res.render("book", {
     number: global.no_of_passengers,
     no_of_seats: req.body.no_of_seats,
   });
@@ -555,7 +554,7 @@ app.get("/calculator", function (req, res) {
   const data = JSON.parse(decodeURIComponent(encodedData));
   console.log(data);
   async function insertOrders(data) {
-    const passengerid = (await getCountFromPassengerTable())[0]["counter"]+1;
+    const passengerid = (await getCountFromPassengerTable())[0]["counter"] + 1;
     for (var k = 0; k < data.length; k++) {
       var number = data[k];
       console.log("See Here : " + passengerid);
